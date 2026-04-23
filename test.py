@@ -32,29 +32,61 @@ def get_delivery_zones():
 
 
 def get_distance():
-    distance = int(
-        input("Enter the total distance to be covered (5-500 km): ")
-    )  # Collect the total distance to be covered
-    if distance > 400:
-        print("Distance too long, cannot assign to robot")
-        return None
-    return distance
+    while True:
+        distance = int(input("Enter the total distance to be covered (5-500 km): "))
+        if distance > 400:
+            print(
+                "Distance too long, cannot assign to robot. Please enter a valid distance."
+            )
+        else:
+            return distance
 
 
 def get_cargo_weights():
-    weights = []
-    for i in range(3):  # Loop to collect cargo weights for each robot
-        weight = int(input(f"Enter the cargo weight for robot {i+1} (1-50 kg): "))
-        if weight > 50:
-            print("Overweight cargo, cannot assign to robot")
-            return None
-        weights.append(weight)
-    return weights
+    cargo_weights = []
+    for i in range(3):
+        while True:
+            weight = int(input(f"Enter the cargo weight for robot {i+1} (1-50 kg): "))
+            if weight > 50:
+                print(
+                    "Overweight cargo, cannot assign to robot. Please enter a valid weight."
+                )
+            else:
+                cargo_weights.append(weight)
+                break
+    return cargo_weights
 
 
 def get_weather_conditions():
-    weather = input("Enter the weather conditions (Clear, Rain, Storm): ")
-    if weather.lower() == "Storm":
-        print("Unsafe conditions, cannot assign to robot")
-        return None
-    return weather
+    while True:
+        condition = (
+            input("Enter the weather condition (Clear, Rain, Storm): ").strip().lower()
+        )
+        if condition == "storm":
+            print(
+                "Unsafe conditions, cannot assign to robot. Please enter a valid weather condition."
+            )
+            exit()
+        elif condition in ["clear", "rain"]:
+            return condition
+        else:
+            print("Invalid weather condition. Please enter Clear, Rain, or Storm.")
+
+
+def main():
+    robot_names = get_robot_names()
+    delivery_zones = get_delivery_zones()
+    distance = get_distance()
+    cargo_weights = get_cargo_weights()
+    weather_conditions = get_weather_conditions()
+
+    print("\nSummary of Assignments:")
+    for i in range(3):
+        print(
+            f"Robot: {robot_names[i]}, Zone: {delivery_zones[i]}, Cargo Weight: {cargo_weights[i]} kg"
+        )
+    print("Robots ready for delivery!")
+
+
+if __name__ == "__main__":
+    main()
