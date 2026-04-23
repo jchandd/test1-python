@@ -33,7 +33,7 @@ def get_delivery_zones():
 
 def get_distance():
     while True:
-        distance = int(input("Enter the total distance to be covered (5-500 km): "))
+        distance = int(input("Enter the total distance to be covered (1-500km): "))
         if distance > 400:
             print(
                 "Distance too long, cannot assign to robot. Please enter a valid distance."
@@ -78,7 +78,7 @@ def main():
     delivery_zones = get_delivery_zones()
     distance = get_distance()
     cargo_weights = get_cargo_weights()
-    weather_conditions = get_weather_conditions()
+    weather_condition = get_weather_conditions()
 
     print("\nSummary of Assignments:")
     for i in range(3):
