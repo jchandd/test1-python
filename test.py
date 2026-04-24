@@ -14,7 +14,7 @@
 
 
 def get_robot_names():
-    robot_names = ["Nova", "Apex", "Bolt"]  # Defined robot names
+    robot_names = []  # Defined robot names
     for i in range(3):
         name = input(f"Enter the name of robot {i+1}: ")  # Loop to collect robot names
         robot_names.append(name)
@@ -22,19 +22,31 @@ def get_robot_names():
 
 
 def get_delivery_zones():
-    zones = ["Downtown", "Suburbs", "Industrial"]  # Defined delivery zones
-    for i in range(3):  # Loop to collect delivery zones for each robot
-        zone = input(
-            f"Enter the delivery zone for robot {i+1} (Downtown, Suburbs, Industrial): "
-        )
-        zones.append(zone)
-    return zones
+    valid_zones = ["downtown", "suburbs", "industrial"]  # Valid delivery zones
+    delivery_zones = []
+    for i in range(3):
+        while True:
+            zone = (
+                input(
+                    f"Enter the delivery zone for robot {i+1} (Downtown, Suburbs, Industrial): "
+                )
+                .strip()
+                .lower()
+            )  # Loop to collect delivery zones
+            if zone in valid_zones:
+                delivery_zones.append(
+                    zone.capitalize()
+                )  # Store the zone with the first letter capitalized
+                break
+            else:
+                print("Invalid zone. Please enter Downtown, Suburbs, or Industrial.")
+    return delivery_zones
 
 
 def get_distance():
     while True:
         distance = int(input("Enter the total distance to be covered (1-500km): "))
-        if distance > 400:
+        if distance > 500:
             print(
                 "Distance too long, cannot assign to robot. Please enter a valid distance."
             )
